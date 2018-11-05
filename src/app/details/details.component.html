@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row loading_indicator" *ngIf="isLoadingInProgress">
+  </div>
+  <div class="row">
+    <div class="spacer-height-60"></div>
+  </div>
+  <div class="row" style="text-align:center;">
+    <div class="rectangle text-center" style="width: 213px; height: 93px;  margin: 0px auto;">LOGO</div>
+  </div>
+  <div class="row">
+    <div class="spacer-height-60"></div>
+  </div>
+  <div class="row">
+    <div class="col-6 text-center">
+      <h1>{{currentTown.location.name}}</h1>
+      <h4>{{currentTown.location.localtime}}</h4>
+    </div>
+    <div class="col-6 text-center">
+      <img src="{{currentTown.current.condition.icon}}"><span class="degreece">{{currentTown.current.temp_c}}&#8451;</span>
+      <p class="conditionText">{{currentTown.current.condition.text}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-right" style="height: 50px">
+      <button type="button" role="button" style="width: 200px; height: 35px; position: right;" (click)="displayTodayBlock(true)"><span>Today</span></button>
+    </div>
+    <div class="col text-left" style="height: 50px">
+      <button type="button" style="width: 200px; height: 35px; position: left; opacity: 1;" (click)="displayForecastBlock()"><span>7
+          Days forecast</span></button>
+    </div>
+  </div>
+  <div id="todayBlock" class="row" *ngIf="displayToday">
+    <div class="col-6 text-right">
+      <p>Feels like</p>
+      <p>Wind speed</p>
+      <p>Humidity</p>
+    </div>
+    <div class="col6-6 text-left">
+      <p>{{currentTown.current.feelslike_c}}&#8451;</p>
+      <p>{{currentTown.current.wind_kph}}km/h</p>
+      <p>{{currentTown.current.humidity}}%</p>
+    </div>
+  </div>
+  <div id="forecastBlock" class="row" *ngIf="displayForecast">
+    <div class="col-12 text-center" *ngFor="let day of currentTown.forecast.forecastday">
+      <div class="row">
+        <div class="col">
+          {{day.date | date: 'dd-MM-yy'}}
+          {{day.day.avgtemp_c}}&#8451;
+          <img src="{{day.day.condition.icon}}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
